@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+@layer base{
+  img{
+    display:inline-block;
+  }
+}
 * {
   box-sizing: border-box;
 }
