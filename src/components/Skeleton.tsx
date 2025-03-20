@@ -1,4 +1,4 @@
-/** @jsxImportSource @emotion/react */
+/** @jsxImportSource @emotion/react */ //Babel 트랜스파일러한테 JSX 코드를 변환할 때, React의 jsx() 함수를 사용하지 말고, Emotion의 jsx() 함수를 대신 사용하라고 알려주기 위함
 import React, {useMemo} from 'react'
 import styled from '@emotion/styled'
 import { keyframes, css } from '@emotion/react';
@@ -18,6 +18,7 @@ interface SkeletonProps{
     unit?:string; //px, em, rem, %
     animation?:boolean;
     bgcolor?:string;
+    color?:string;
     style?:React.CSSProperties
     className?:string
 }
@@ -32,11 +33,12 @@ const pulseAnimation = css`
     pulsAnimation:${pulseKeyframe} 1.5s ease-in-out infinite;
 `;
 
-const Base = styled.div<Props>`
+const Base = styled.div<SkeletonProps>`
     ${( {bgcolor} ) => bgcolor && `background: ${bgcolor}`};
     ${( {rounded} ) => rounded && `border-raidus: 8px`};
     ${( {circle} ) => circle && `border-raidus: 50%`};
     ${( {width, height} ) => (width || height) && `display:block`};
+    ${( {color} ) => color && `color:${color} &:hover:${pulseAnimation}`}
     ${( {animation} ) => animation && pulseAnimation};
     width: ${({width,unit}) => width && unit && `${width}${unit}`}
     height: ${({height,unit}) => height && unit && `${height}${unit}`}
